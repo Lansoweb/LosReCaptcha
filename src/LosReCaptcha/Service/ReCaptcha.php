@@ -478,14 +478,7 @@ HTML;
         }
 
         /* Fetch an instance of the http client */
-        $httpClient = new HttpClient(
-            self::VERIFY_SERVER,
-            array(
-                'adapter'   => 'Zend\Http\Client\Adapter\Socket',
-                'sslcapath' => '/etc/ssl/certs'
-            )
-        );
-
+        $httpClient = $this->getHttpClient();
 
         $queryParams = array('secret' => $this->secretKey,
                             'remoteip'   => $this->ip,
