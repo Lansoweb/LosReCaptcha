@@ -28,7 +28,8 @@ return [
 	        'losrecaptcha/recaptcha'  => LosReCaptcha\Form\View\Helper\Captcha\ReCaptcha::class,
 	    ],
 	    'factories' => [
-	        LosReCaptcha\Form\View\Helper\Captcha\ReCaptcha::class => Zend\ServiceManager\Factory\InvokableFactory::class,
+	        LosReCaptcha\Form\View\Helper\Captcha\ReCaptcha::class => 
+	            Zend\ServiceManager\Factory\InvokableFactory::class,
 	    ],
     ],
 ];
