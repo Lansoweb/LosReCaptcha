@@ -1,38 +1,20 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
 namespace LosReCaptcha\Captcha;
 
 use Traversable;
 use LosReCaptcha\Service\ReCaptcha as ReCaptchaService;
-use Zend\Captcha\ReCaptcha as ZendReCaptcha;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Captcha\AbstractAdapter;
 
 /**
- * ReCaptcha adapter
+ * ReCaptcha v2 adapter
  *
  * Allows to insert captchas driven by ReCaptcha service
  *
  * @see http://recaptcha.net/apidocs/captcha/
  */
-class ReCaptcha extends ZendReCaptcha
+class ReCaptcha extends AbstractAdapter
 {
-
-    /**
-     * Error messages
-     *
-     * @var array
-     */
-    protected $messageTemplates = array(
-        self::MISSING_VALUE => 'Missing captcha field',
-        self::ERR_CAPTCHA => 'Failed to validate captcha',
-        self::BAD_CAPTCHA => 'Captcha value is wrong: %value%'
-    );
 
     /**
      * Constructor
@@ -41,9 +23,7 @@ class ReCaptcha extends ZendReCaptcha
      */
     public function __construct($options = null)
     {
-        $this->service = new ReCaptchaService();
-        $this->serviceParams = $this->getService()->getParams();
-        $this->serviceOptions = $this->getService()->getOptions();
+        $this->service = new ReCaptchaService($options['site_key'], $options['secret_key']);
 
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
@@ -60,20 +40,6 @@ class ReCaptcha extends ZendReCaptcha
         if (is_array($options)) {
             $this->setOptions($options);
         }
-
-        if (! empty($options)) {
-            if (array_key_exists('secret_key', $options)) {
-                $this->getService()->setSecretKey($options['secret_key']);
-            } elseif (array_key_exists('private_key', $options)) {
-                $this->getService()->setPrivateKey($options['private_key']);
-            }
-            if (array_key_exists('site_key', $options)) {
-                $this->getService()->setSiteKey($options['site_key']);
-            } elseif (array_key_exists('public_key', $options)) {
-                $this->getService()->setPublicKey($options['public_key']);
-            }
-            $this->setOptions($options);
-        }
     }
 
     /**
@@ -86,12 +52,12 @@ class ReCaptcha extends ZendReCaptcha
      */
     public function isValid($value, $context = null)
     {
-        if (! is_array($value) && ! is_array($context)) {
+        if (!is_array($value) && !is_array($context)) {
             $this->error(self::MISSING_VALUE);
             return false;
         }
 
-        if (! is_array($value) && is_array($context)) {
+        if (!is_array($value) && is_array($context)) {
             $value = $context;
         }
 
@@ -126,4 +92,14 @@ class ReCaptcha extends ZendReCaptcha
     {
         return "losrecaptcha/recaptcha";
     }
+
+    /**
+     * {@inheritDoc}
+     * @see \Zend\Captcha\AdapterInterface::generate()
+     */
+    public function generate()
+    {
+        return '';
+    }
+
 }
