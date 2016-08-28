@@ -12,7 +12,7 @@ $this->add([
    'name' => 'captcha',
     'type' => 'captcha',
     'options' => [
-        'captcha' => new LosReCaptch\Captcha\ReCaptcha([
+        'captcha' => new LosReCaptcha\Captcha\ReCaptcha([
             'site_key' => $siteKey,
             'secret_key' => $siteSecret,
         ]),
@@ -25,10 +25,10 @@ You need to add the necessary alias to your view_helper instance:
 return [
 	'view_helpers' {
 	    'aliases' => [
-	        'losrecaptcha/recaptcha'  => Form\View\Helper\Captcha\ReCaptcha::class,
+	        'losrecaptcha/recaptcha'  => LosReCaptcha\Form\View\Helper\Captcha\ReCaptcha::class,
 	    ],
 	    'factories' => [
-	        Form\View\Helper\Captcha\ReCaptcha::class => InvokableFactory::class,
+	        LosReCaptcha\Form\View\Helper\Captcha\ReCaptcha::class => Zend\ServiceManager\Factory\InvokableFactory::class,
 	    ],
     ],
 ];
