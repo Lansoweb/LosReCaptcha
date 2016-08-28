@@ -9,7 +9,7 @@
 
 namespace LosReCaptcha\Form\View\Helper\Captcha;
 
-use Zend\Captcha\ReCaptcha as CaptchaAdapter;
+use LosReCaptcha\Captcha\ReCaptcha as CaptchaAdapter;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
 use Zend\Form\View\Helper\FormInput;
@@ -47,7 +47,7 @@ class ReCaptcha extends FormInput
 
         if ($captcha === null || !$captcha instanceof CaptchaAdapter) {
             throw new Exception\DomainException(sprintf(
-                '%s requires that the element has a "captcha" attribute implementing Zend\Captcha\AdapterInterface; none found',
+                '%s requires that the element has a "captcha" is an instance of LosReCaptcha\Captcha\ReCaptcha',
                 __METHOD__
             ));
         }
