@@ -96,7 +96,7 @@ class ReCaptcha
 
         $this->params = $params;
 
-        $this->options = $options;
+        $this->options = array_merge($this->options, $options);
     }
 
     /**
