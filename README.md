@@ -22,6 +22,7 @@ $this->add([
 
 For [Invisible ReCaptcha](https://developers.google.com/recaptcha/docs/invisible):
 ```php
+// ...
 $this->add([
    'name' => 'captcha',
     'type' => 'captcha',
@@ -34,6 +35,7 @@ $this->add([
         ]),
     ],
 ]);
+// ...
 $this->add([
     'name' => 'submit-button',
     'type' => \Zend\Form\Element\Button::class,
