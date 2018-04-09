@@ -71,7 +71,7 @@ class ReCaptcha extends FormInput
      * @param  string $responseId
      * @return string
      */
-    protected function renderHiddenInput($responseName, $responseId)
+    private function renderHiddenInput($responseName, $responseId)
     {
         $pattern        = '<input type="hidden" %s%s';
         $closingBracket = $this->getInlineClosingBracket();
@@ -92,7 +92,7 @@ class ReCaptcha extends FormInput
      * @param  string $responseId
      * @return string
      */
-    protected function renderJsEvents($responseId)
+    private function renderJsEvents($responseId)
     {
         $elseif = 'else if'; // php-cs-fixer bug
         $js = <<<EOJ

@@ -54,10 +54,35 @@ class Invisible extends FormInput
 
         $name   = $element->getName();
         $id     = isset($attributes['id']) ? $attributes['id'] : $name;
-        $markup = $captcha->getService()->getInvisibleHtml();
-        $js     = $this->renderJsEvents($id, $captcha->siteKey(), $captcha->buttonId(), $captcha->callback());
+        $responseName  = empty($name) ? 'recaptcha_response_field' : $name . '[recaptcha_response_field]';
+        $responseId    = $id . '-response';
 
-        return $js . $markup;
+        $markup = $captcha->getService()->getInvisibleHtml();
+        $hidden = $this->renderHiddenInput($responseName, $responseId);
+        $js     = $this->renderJsEvents($responseId, $captcha->siteKey(), $captcha->buttonId(), $captcha->callback());
+
+        return $hidden . $markup . $js;
+    }
+
+    /**
+     * Render hidden input elements for the response
+     *
+     * @param  string $responseName
+     * @param  string $responseId
+     * @return string
+     */
+    private function renderHiddenInput($responseName, $responseId)
+    {
+        $pattern        = '<input type="hidden" %s%s';
+        $closingBracket = $this->getInlineClosingBracket();
+
+        $attributes = $this->createAttributesString([
+            'name' => $responseName,
+            'id'   => $responseId,
+        ]);
+        $response = sprintf($pattern, $attributes, $closingBracket);
+
+        return $response;
     }
 
     /**
@@ -67,7 +92,7 @@ class Invisible extends FormInput
      * @param  string $responseId
      * @return string
      */
-    protected function renderJsEvents($responseId, $siteKey, $buttonId, $callback)
+    private function renderJsEvents($responseId, $siteKey, $buttonId, $callback)
     {
         $js = <<<EOJ
 <script type="text/javascript" language="JavaScript">
