@@ -1,7 +1,6 @@
 <?php
 namespace LosReCaptcha;
 
-use LosReCaptcha\Form\View\Helper\Button;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
 class ConfigProvider
