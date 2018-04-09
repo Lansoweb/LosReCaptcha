@@ -13,7 +13,7 @@ class ReCaptcha
      *
      * @var string
      */
-    const API_SERVER = 'https://www.google.com/recaptcha/api';
+    const API_SERVER = 'https://www.google.com/recaptcha/api.js';
 
     /**
      * URI to the verify server
@@ -48,12 +48,12 @@ class ReCaptcha
      *
      * @var array
      */
-    protected $params = array(
+    protected $params = [
         'ssl' => false, /* Use SSL or not when generating the recaptcha */
         'xhtml' => false /* Enable XHTML output (this will not be XHTML Strict
                             compliant since the IFRAME is necessary when
                             Javascript is disabled) */
-    );
+    ];
 
     /**
      * Options for tailoring reCaptcha
@@ -62,10 +62,10 @@ class ReCaptcha
      *
      * @var array
      */
-    protected $options = array(
+    protected $options = [
         'theme' => 'light',
         'lang' => null, // Auto-detect
-    );
+    ];
 
     protected $request = null;
 
@@ -74,12 +74,18 @@ class ReCaptcha
      *
      * @param string $siteKey
      * @param string $secretKey
-     * @param array|Traversable $params
-     * @param array|Traversable $options
+     * @param array $params
+     * @param array $options
      * @param string $ip
      */
-    public function __construct($siteKey, $secretKey, RequestInterface $request = null, array $params = [], array $options = [], $ip = null)
-    {
+    public function __construct(
+        $siteKey,
+        $secretKey,
+        RequestInterface $request = null,
+        array $params = [],
+        array $options = [],
+        $ip = null
+    ) {
         $this->siteKey = $siteKey;
         $this->secretKey = $secretKey;
 
@@ -135,25 +141,34 @@ class ReCaptcha
 
         $langOption = '';
 
-        if (isset($this->options['lang']) && !empty($this->options['lang'])) {
+        if (isset($this->options['lang']) && ! empty($this->options['lang'])) {
             $langOption = "?hl={$this->options['lang']}";
         }
 
         $return = <<<HTML
-<div id="recaptcha_widget" class="g-recaptcha" data-sitekey="{$this->siteKey}" data-theme="{$this->options['theme']}"></div>
-<noscript>
-    <div style="width: 302px; height: 352px;">
-        <div style="width: 302px; height: 352px; position: relative;">
-            <div style="width: 302px; height: 352px; position: absolute;">
-                <iframe src="{$host}/fallback?k={$this->siteKey}" frameborder="0" scrolling="no" style="width: 302px; height:352px; border-style: none;"></iframe>
-            </div>
-            <div style="width: 250px; height: 80px; position: absolute; border-style: none; bottom: 21px; left: 25px; margin: 0px; padding: 0px; right: 25px;">
-                <textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 80px; border: 1px solid #c1c1c1; margin: 0px; padding: 0px; resize: none;" value=""></textarea>
-            </div>
-        </div>
-    </div>
-</noscript>
-<script type="text/javascript" src="{$host}.js{$langOption}" async defer></script>
+<script type="text/javascript" src="{$host}{$langOption}" async defer></script>
+HTML;
+
+        return $return;
+    }
+
+    public function getInvisibleHtml()
+    {
+        $host = self::API_SERVER;
+
+        $query = [
+            'onload' => 'renderLosInvisibleRecaptcha',
+            'render' => 'explicit',
+        ];
+
+        if (isset($this->options['lang']) && ! empty($this->options['lang'])) {
+            $query['hl'] = $this->options['lang'];
+        }
+
+        $query = http_build_query($query);
+
+        $return = <<<HTML
+<script type="text/javascript" src="{$host}?{$query}" async defer></script>
 HTML;
 
         return $return;

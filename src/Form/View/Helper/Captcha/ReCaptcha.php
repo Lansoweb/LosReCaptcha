@@ -26,7 +26,7 @@ class ReCaptcha extends FormInput
      */
     public function __invoke(ElementInterface $element = null)
     {
-        if (!$element) {
+        if (! $element) {
             return $this;
         }
 
@@ -45,7 +45,7 @@ class ReCaptcha extends FormInput
         $attributes = $element->getAttributes();
         $captcha = $element->getCaptcha();
 
-        if ($captcha === null || !$captcha instanceof CaptchaAdapter) {
+        if ($captcha === null || ! $captcha instanceof CaptchaAdapter) {
             throw new Exception\DomainException(sprintf(
                 '%s requires that the element has a "captcha" is an instance of LosReCaptcha\Captcha\ReCaptcha',
                 __METHOD__
@@ -54,7 +54,7 @@ class ReCaptcha extends FormInput
 
         $name          = $element->getName();
         $id            = isset($attributes['id']) ? $attributes['id'] : $name;
-        $responseName  = empty($name) ? 'recaptcha_response_field'  : $name . '[recaptcha_response_field]';
+        $responseName  = empty($name) ? 'recaptcha_response_field' : $name . '[recaptcha_response_field]';
         $responseId    = $id . '-response';
 
         $markup = $captcha->getService()->getHtml($name);
@@ -76,10 +76,10 @@ class ReCaptcha extends FormInput
         $pattern        = '<input type="hidden" %s%s';
         $closingBracket = $this->getInlineClosingBracket();
 
-        $attributes = $this->createAttributesString(array(
+        $attributes = $this->createAttributesString([
             'name' => $responseName,
             'id'   => $responseId,
-        ));
+        ]);
         $response = sprintf($pattern, $attributes, $closingBracket);
 
         return $response;
@@ -95,7 +95,7 @@ class ReCaptcha extends FormInput
     protected function renderJsEvents($responseId)
     {
         $elseif = 'else if'; // php-cs-fixer bug
-        $js =<<<EOJ
+        $js = <<<EOJ
 <script type="text/javascript" language="JavaScript">
 function windowOnLoad(fn)
 {

@@ -1,0 +1,5 @@
+parameters:
+    excludes_analyse:
+        - src/ConfigProvider.php
+        - src/Form/View/Helper/Captcha/Invisible.php
+        - src/Form/View/Helper/Captcha/ReCaptcha.php
