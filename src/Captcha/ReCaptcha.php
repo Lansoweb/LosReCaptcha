@@ -101,8 +101,8 @@ class ReCaptcha extends AbstractAdapter
         }
 
         if (! $res->isSuccess()) {
-            $this->error(self::BAD_CAPTCHA, end($res->getErrorCodes()));
-            //$service->setParam('error', $res->getErrorCodes());
+            $result = $res->getErrorCodes();
+            $this->error(self::BAD_CAPTCHA, end($result));
             return false;
         }
 
