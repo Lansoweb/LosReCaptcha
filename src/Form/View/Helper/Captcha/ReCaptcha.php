@@ -10,9 +10,9 @@
 namespace LosReCaptcha\Form\View\Helper\Captcha;
 
 use LosReCaptcha\Captcha\ReCaptcha as CaptchaAdapter;
-use Zend\Form\ElementInterface;
-use Zend\Form\Exception;
-use Zend\Form\View\Helper\FormInput;
+use Laminas\Form\ElementInterface;
+use Laminas\Form\Exception;
+use Laminas\Form\View\Helper\FormInput;
 
 class ReCaptcha extends FormInput
 {

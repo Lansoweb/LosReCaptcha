@@ -3,8 +3,8 @@ namespace LosReCaptcha\Captcha;
 
 use Traversable;
 use LosReCaptcha\Service\ReCaptcha as ReCaptchaService;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Captcha\AbstractAdapter;
+use Laminas\Stdlib\ArrayUtils;
+use Laminas\Captcha\AbstractAdapter;
 use LosReCaptcha\Service\Exception;
 
 /**
@@ -71,7 +71,7 @@ class ReCaptcha extends AbstractAdapter
     /**
      * Validate captcha
      *
-     * @see \Zend\Validator\ValidatorInterface::isValid()
+     * @see \Laminas\Validator\ValidatorInterface::isValid()
      * @param mixed $value
      * @param mixed $context
      * @return bool
@@ -121,7 +121,7 @@ class ReCaptcha extends AbstractAdapter
 
     /**
      * {@inheritDoc}
-     * @see \Zend\Captcha\AdapterInterface::generate()
+     * @see \Laminas\Captcha\AdapterInterface::generate()
      */
     public function generate()
     {

@@ -2,9 +2,9 @@
 namespace LosReCaptcha\Service\Request;
 
 use LosReCaptcha\Service\ReCaptcha;
-use Zend\Http\Client;
+use Laminas\Http\Client;
 
-final class ZendHttpClient implements RequestInterface
+final class LaminasHttpClient implements RequestInterface
 {
     /**
      * HTTP client

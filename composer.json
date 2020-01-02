@@ -1,48 +1,56 @@
 {
-  "name" : "los/losrecaptcha",
-  "description" : "ZF2 module for integration with new ReCaptcha service form Google",
-  "require" : {
-    "php" : "^7.1",
-    "zendframework/zend-form": "^2.11",
-    "zendframework/zend-captcha": "^2.7"
-  },
-  "require-dev": {
-    "zendframework/zend-coding-standard": "^1.0",
-    "squizlabs/php_codesniffer": "^2.7",
-    "phpstan/phpstan": "^0.9.2",
-    "zendframework/zend-http": "^2.7"
-  },
-  "license" : "BSD-3-Clause",
-  "keywords" : [ "los", "recaptcha", "captcha", "module", "zf2" ],
-  "autoload" : {
-    "psr-4" : {
-      "LosReCaptcha\\" : "src/"
-    }
-  },
-  "suggest" : {
-    "los/losbase" : "los/losbase for some abstract classes to speed development ",
-    "los/loslog" : "los/loslog for logging",
-    "los/losui" : "los/losui for twitter bootstrap 3 styling, jquery, chosen and other libraries"
-  },
-  "type" : "library",
-  "authors" : [ {
-    "name" : "Leandro Silva",
-    "email" : "leandro@leandrosilva.info",
-    "homepage" : "http://leandrosilva.info"
-  } ],
-  "homepage" : "http://github.com/Lansoweb/LosReCaptcha",
-  "extra": {
-    "zf": {
-      "config-provider": "LosReCaptcha\\ConfigProvider"
-    }
-  },
-  "scripts" : {
-    "check": [
-      "@cs-check",
-      "@phpstan"
+    "name": "los/losrecaptcha",
+    "description": "ZF2 module for integration with new ReCaptcha service form Google",
+    "require": {
+        "php": "^7.1",
+        "laminas/laminas-form": "^2.11",
+        "laminas/laminas-captcha": "^2.7"
+    },
+    "require-dev": {
+        "laminas/laminas-coding-standard": "^1.0",
+        "squizlabs/php_codesniffer": "^2.7",
+        "phpstan/phpstan": "^0.9.2",
+        "laminas/laminas-http": "^2.7"
+    },
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "los",
+        "recaptcha",
+        "captcha",
+        "module",
+        "zf2"
     ],
-    "cs-check": "phpcs",
-    "cs-fix": "phpcbf",
-    "phpstan": "phpstan analyse -l 4 -c phpstan.neon src"
-  }
+    "autoload": {
+        "psr-4": {
+            "LosReCaptcha\\": "src/"
+        }
+    },
+    "suggest": {
+        "los/losbase": "los/losbase for some abstract classes to speed development ",
+        "los/loslog": "los/loslog for logging",
+        "los/losui": "los/losui for twitter bootstrap 3 styling, jquery, chosen and other libraries"
+    },
+    "type": "library",
+    "authors": [
+        {
+            "name": "Leandro Silva",
+            "email": "leandro@leandrosilva.info",
+            "homepage": "http://leandrosilva.info"
+        }
+    ],
+    "homepage": "http://github.com/Lansoweb/LosReCaptcha",
+    "extra": {
+        "zf": {
+            "config-provider": "LosReCaptcha\\ConfigProvider"
+        }
+    },
+    "scripts": {
+        "check": [
+            "@cs-check",
+            "@phpstan"
+        ],
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "phpstan": "phpstan analyse -l 4 -c phpstan.neon src"
+    }
 }

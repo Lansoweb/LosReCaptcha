@@ -1,7 +1,7 @@
 <?php
 namespace LosReCaptcha;
 
-use Zend\ServiceManager\Factory\InvokableFactory;
+use Laminas\ServiceManager\Factory\InvokableFactory;
 
 class ConfigProvider
 {

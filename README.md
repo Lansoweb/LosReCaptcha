@@ -6,7 +6,7 @@ PHP module for using the ReCaptcha v2 system from Google
 
 ## Zend Form
 
-To use with Zend\Form, just initialize like the default ReCaptcha element:
+To use with Laminas\Form, just initialize like the default ReCaptcha element:
 ```php
 $this->add([
    'name' => 'captcha',
@@ -38,7 +38,7 @@ $this->add([
 // ...
 $this->add([
     'name' => 'submit-button',
-    'type' => \Zend\Form\Element\Button::class,
+    'type' => \Laminas\Form\Element\Button::class,
     'options' => [
         'label' => _('Log In'),
     ],
