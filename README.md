@@ -1,5 +1,11 @@
 # LosReCaptcha
 
+> [!WARNING]
+> ## Archived
+> This Zend Form reCAPTCHA v2 integration is no longer maintained and will
+> receive no further releases. Use the current SDK and integration guidance
+> from your chosen bot-protection provider for new applications.
+
 PHP module for using the ReCaptcha v2 system from Google
 
 [https://www.google.com/recaptcha/intro/index.html](https://www.google.com/recaptcha/intro/index.html)
